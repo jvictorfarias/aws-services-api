@@ -53,6 +53,7 @@ class S3 {
   async delete(bucketName) {
     const bucket = new aws.S3();
 
+    // Need fix
     try {
       await bucket
         .deleteObjects({ Bucket: bucketName })
