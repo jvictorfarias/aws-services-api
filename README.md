@@ -6,3 +6,11 @@
 `s3.upload('nome_do_arquivo', 'nome_do_bucket')`<br>
 `s3.index()`<br>
 `s3.delete('nome_do_bucket')`<br>
+
+## Instalação
+
+`yarn install`
+
+## Utilização
+
+`yarn dev`
