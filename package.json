@@ -18,6 +18,7 @@
     "sucrase": "^3.10.1"
   },
   "dependencies": {
-    "aws-sdk": "^2.537.0"
+    "aws-sdk": "^2.537.0",
+    "express": "^4.17.1"
   }
 }
