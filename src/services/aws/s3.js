@@ -40,14 +40,15 @@ class S3 {
     }
   }
 
-  async index() {
+  async index(req, res) {
     const bucket = new aws.S3();
-    try {
-      const data = await bucket.listBuckets().promise();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
+    const data = await bucket.listBuckets().promise();
+
+    if (!data) {
+      return res.json(400).json({ error: 'not found' });
     }
+
+    return res.status(200).json(data);
   }
 
   async delete(bucketName) {

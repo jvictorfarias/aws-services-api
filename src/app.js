@@ -1,17 +1,21 @@
-import s3 from './services/aws/s3';
+import express from 'express';
+import routes from './routes';
 
 class App {
   constructor() {
-    this.s3();
+    this.server = express();
+
+    this.middlewares();
+    this.routes();
   }
 
-  s3() {
-    // s3.create('bucket-do-denys');
-    // O arquivo deve estar na pasta /resources
-    // s3.upload('AWS.py', 'bucket-do-denys');
-    s3.index();
-    // s3.delete('novo-bucket-ufc-quixada');
+  middlewares() {
+    this.server.use(express.json());
+  }
+
+  routes() {
+    this.server.use(routes);
   }
 }
 
-export default new App();
+export default new App().server;
