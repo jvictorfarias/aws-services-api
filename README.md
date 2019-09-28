@@ -18,6 +18,10 @@
 
 `DELETE /s3 {body: name}`<br>
 
+### Delete Bucket Files:
+
+`DELETE /S3 {body: name, file}`
+
 ## Instalação
 
 `yarn install`

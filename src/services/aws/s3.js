@@ -67,7 +67,7 @@ class S3 {
     await bucket
       .deleteObject({ Bucket: name, Key: file })
       .promise()
-      .then(data => {
+      .then(() => {
         return res.status(200).json({ success: 'object deleted' });
       })
       .catch(err => {
