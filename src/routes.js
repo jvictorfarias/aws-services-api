@@ -6,6 +6,7 @@ const upload = multer();
 const routes = new Router();
 
 routes.get('/s3', s3.index);
+routes.get('/s3/:name', s3.show);
 routes.post('/s3', s3.create);
 routes.delete('/s3', s3.delete);
 routes.post('/s3/upload', upload.single('file'), s3.upload);

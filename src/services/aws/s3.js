@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import aws from 'aws-sdk';
+import AWS from 'aws-sdk';
 
 class S3 {
   // Fix to multipart form
   async upload(req, res) {
-    const bucket = new aws.S3();
+    const bucket = new AWS.S3();
     const { originalname: name, buffer } = req.file;
     const params = {
       Bucket: req.headers.name,
@@ -21,7 +21,7 @@ class S3 {
   }
 
   async create(req, res) {
-    const bucket = new aws.S3();
+    const bucket = new AWS.S3();
     const { name } = req.body;
     try {
       await bucket
@@ -39,14 +39,29 @@ class S3 {
   }
 
   async index(req, res) {
-    const bucket = new aws.S3();
-    const data = await bucket.listBuckets().promise();
+    const bucket = new AWS.S3();
+    await bucket
+      .listBuckets()
+      .promise()
+      .then(data => {
+        return res.status(200).json(data.Buckets);
+      })
+      .catch(err => {
+        return res.status(400).json({ error: err });
+      });
+  }
 
-    if (!data) {
-      return res.json(400).json({ error: 'not found' });
-    }
-
-    return res.status(200).json(data);
+  async show(req, res) {
+    const bucket = new AWS.S3();
+    await bucket
+      .listObjectsV2({ Bucket: req.param.name })
+      .promise()
+      .then(data => {
+        return res.status(200).json(data);
+      })
+      .catch(err => {
+        return res.status(400).json({ error: err });
+      });
   }
 
   async delete(req, res) {
