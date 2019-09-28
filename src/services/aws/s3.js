@@ -3,38 +3,40 @@ import aws from 'aws-sdk';
 import path from 'path';
 import fs from 'fs';
 import { promisify } from 'util';
+import multer from 'multer';
 
 class S3 {
-  async upload(fileName, bucketName) {
+  // Fix to multipart form
+  async upload(req, res) {
     const bucket = new aws.S3();
-
-    const filePath = path.resolve(
-      __dirname,
-      '..',
-      '..',
-      '..',
-      'resources',
-      fileName
-    );
-    const file = await promisify(fs.readFile)(filePath);
+    const { originalname: name, buffer } = req.file;
     const params = {
-      Bucket: bucketName,
-      Key: fileName,
-      Body: file,
+      Bucket: req.headers.name,
+      Key: name,
+      Body: buffer,
     };
 
     try {
-      const data = await bucket.upload(params).promise();
-      console.log(data);
+      await bucket.upload(params).promise();
+      return res.status(200).json({ ok: 'ok' });
     } catch (err) {
-      console.log(err);
+      return res.status(400).json({ error: 'error' });
     }
   }
 
-  async create(bucketName) {
+  async create(req, res) {
     const bucket = new aws.S3();
+    const { name } = req.body;
     try {
-      await bucket.createBucket({ Bucket: bucketName }).promise();
+      await bucket
+        .createBucket({ Bucket: name })
+        .promise()
+        .then(() => {
+          return res.status(200).json({ success: `bucket ${name} created` });
+        })
+        .catch(() => {
+          return res.status(400).json({ error: 'failed to create bucket' });
+        });
     } catch (err) {
       console.log(err);
     }
@@ -51,17 +53,10 @@ class S3 {
     return res.status(200).json(data);
   }
 
-  async delete(bucketName) {
-    const bucket = new aws.S3();
-
-    // Need fix
-    try {
-      await bucket
-        .deleteObjects({ Bucket: bucketName })
-        .then(await bucket.deleteBucket({ Bucket: bucketName }).promise());
-    } catch (err) {
-      console.log(err);
-    }
+  async delete(req, res) {
+    /**
+     * Missing good implementation
+     */
   }
 }
 
