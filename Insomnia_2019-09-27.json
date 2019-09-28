@@ -1,0 +1,170 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2019-09-28T02:27:55.499Z",
+  "__export_source": "insomnia.desktop.app:v6.6.2",
+  "resources": [
+    {
+      "_id": "req_a242f43ae0dc4efab8380d03edaa85eb",
+      "authentication": {},
+      "body": {
+        "mimeType": "multipart/form-data",
+        "params": [
+          {
+            "fileName": "/home/jvictorfarias/Pictures/ifce.jpg",
+            "id": "pair_7ad8a6ab78c2493d832dd7c7138f466c",
+            "name": "file",
+            "type": "file",
+            "value": ""
+          }
+        ]
+      },
+      "created": 1569619544896,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_60d8b93f4e9a482297dd495db29ca6eb",
+          "name": "Content-Type",
+          "value": "multipart/form-data"
+        },
+        {
+          "id": "pair_bb64b7998ce841ff936427c2344cc6e5",
+          "name": "name",
+          "value": "jvictorfarias"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1569619544896,
+      "method": "POST",
+      "modified": 1569635679934,
+      "name": "Upload",
+      "parameters": [],
+      "parentId": "fld_c43379c5d235421e91fe987a0bb5f8a3",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/s3/upload",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_c43379c5d235421e91fe987a0bb5f8a3",
+      "created": 1569615238476,
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1569615238476,
+      "modified": 1569615238476,
+      "name": "AWS S3",
+      "parentId": "wrk_2ae43696600b464a906396583a9295bf",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_2ae43696600b464a906396583a9295bf",
+      "created": 1569615225290,
+      "description": "",
+      "modified": 1569615225290,
+      "name": "AWS",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_aaf478cde9834f369d39e030349af993",
+      "authentication": {},
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\":\"test\"\n}"
+      },
+      "created": 1569619507682,
+      "description": "",
+      "headers": [
+        {
+          "id": "pair_63cb51ca489b48ccaf266c01a0f19bd4",
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "isPrivate": false,
+      "metaSortKey": -1569619507782,
+      "method": "POST",
+      "modified": 1569636768771,
+      "name": "Create",
+      "parameters": [],
+      "parentId": "fld_c43379c5d235421e91fe987a0bb5f8a3",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/s3",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f77398dba538496eac00cf0f653dbd7d",
+      "authentication": {},
+      "body": {},
+      "created": 1569619520321,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1569619507732,
+      "method": "DELETE",
+      "modified": 1569619525021,
+      "name": "Delete",
+      "parameters": [],
+      "parentId": "fld_c43379c5d235421e91fe987a0bb5f8a3",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3a313df1af344a109d7b66c7f5e2f788",
+      "authentication": {},
+      "body": {},
+      "created": 1569615477494,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1569615477495,
+      "method": "GET",
+      "modified": 1569615528664,
+      "name": "Index",
+      "parameters": [],
+      "parentId": "fld_c43379c5d235421e91fe987a0bb5f8a3",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{ base_url  }}/s3",
+      "_type": "request"
+    },
+    {
+      "_id": "env_1244fc79410d3190fae9644f5f54aea0bcc0d3c2",
+      "color": null,
+      "created": 1569615225657,
+      "data": { "base_url": "http://localhost:3333" },
+      "dataPropertyOrder": { "&": ["base_url"] },
+      "isPrivate": false,
+      "metaSortKey": 1569615225657,
+      "modified": 1569615497641,
+      "name": "Base Environment",
+      "parentId": "wrk_2ae43696600b464a906396583a9295bf",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_1244fc79410d3190fae9644f5f54aea0bcc0d3c2",
+      "cookies": [],
+      "created": 1569615225665,
+      "modified": 1569615225665,
+      "name": "Default Jar",
+      "parentId": "wrk_2ae43696600b464a906396583a9295bf",
+      "_type": "cookie_jar"
+    }
+  ]
+}
