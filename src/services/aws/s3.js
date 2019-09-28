@@ -62,9 +62,17 @@ class S3 {
   }
 
   async delete(req, res) {
-    /**
-     * Missing good implementation
-     */
+    const bucket = new AWS.S3();
+    const { name, file } = req.body;
+    await bucket
+      .deleteObject({ Bucket: name, Key: file })
+      .promise()
+      .then(data => {
+        return res.status(200).json({ success: 'object deleted' });
+      })
+      .catch(err => {
+        return res.status(400).json({ error: err });
+      });
   }
 }
 
