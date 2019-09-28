@@ -23,19 +23,16 @@ class S3 {
   async create(req, res) {
     const bucket = new AWS.S3();
     const { name } = req.body;
-    try {
-      await bucket
-        .createBucket({ Bucket: name })
-        .promise()
-        .then(() => {
-          return res.status(200).json({ success: `bucket ${name} created` });
-        })
-        .catch(() => {
-          return res.status(400).json({ error: 'failed to create bucket' });
-        });
-    } catch (err) {
-      console.log(err);
-    }
+
+    await bucket
+      .createBucket({ Bucket: name })
+      .promise()
+      .then(() => {
+        return res.status(200).json({ success: `bucket ${name} created` });
+      })
+      .catch(() => {
+        return res.status(400).json({ error: 'failed to create bucket' });
+      });
   }
 
   async index(req, res) {
@@ -54,7 +51,7 @@ class S3 {
   async show(req, res) {
     const bucket = new AWS.S3();
     await bucket
-      .listObjectsV2({ Bucket: req.param.name })
+      .listObjectsV2({ Bucket: req.params.name })
       .promise()
       .then(data => {
         return res.status(200).json(data);
