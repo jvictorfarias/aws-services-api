@@ -1,11 +1,22 @@
 # API de comunicação com o serviço AWS S3
 
-## Para utilizar da API de comunicação, basta chamar as funções S3 que estão em app.js
+## Para utilizar da API de comunicação, basta chamar as requisições HTTP via postman ou insomnia
 
-`s3.create('nome_do_bucket')`<br>
-`s3.upload('nome_do_arquivo', 'nome_do_bucket')`<br>
-`s3.index()`<br>
-`s3.delete('nome_do_bucket')`<br>
+### Upload File:
+
+`POST /s3/upload {header: name, multipart: file}`<br>
+
+### Create Bucket:
+
+`POST /s3 {body: name}`<br>
+
+### List Buckets:
+
+`GET /s3`<br>
+
+### Delete Buckets:
+
+`DELETE /s3 {body: name}`<br>
 
 ## Instalação
 
