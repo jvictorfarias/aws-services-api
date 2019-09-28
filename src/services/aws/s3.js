@@ -1,9 +1,5 @@
 /* eslint-disable no-console */
 import aws from 'aws-sdk';
-import path from 'path';
-import fs from 'fs';
-import { promisify } from 'util';
-import multer from 'multer';
 
 class S3 {
   // Fix to multipart form
