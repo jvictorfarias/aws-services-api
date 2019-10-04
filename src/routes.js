@@ -1,20 +1,20 @@
 import { Router } from 'express';
 import multer from 'multer';
-import s3 from './services/aws/s3';
+import S3 from './services/aws/S3';
 
 const upload = multer();
 const routes = new Router();
 
 // Show all buckets
-routes.get('/s3', s3.index);
+routes.get('/S3', S3.index);
 // Show objects of a specific bucket
-routes.get('/s3/:name', s3.show);
+routes.get('/S3/:name', S3.show);
 // Create bucket
-routes.post('/s3', s3.create);
+routes.post('/S3', S3.create);
 // Delete bucket files
-routes.delete('/s3/', s3.delete);
+routes.delete('/S3/', S3.delete);
 // Delete buckets???
 // Upload files to the bucket
-routes.post('/s3/upload', upload.single('file'), s3.upload);
+routes.post('/S3/upload', upload.single('file'), S3.upload);
 
 export default routes;
