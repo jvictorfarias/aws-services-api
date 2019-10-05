@@ -18,8 +18,10 @@
     "sucrase": "^3.10.1"
   },
   "dependencies": {
+    "morgan": "^1.9.1",
     "aws-sdk": "^2.537.0",
     "express": "^4.17.1",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0"
   }
 }

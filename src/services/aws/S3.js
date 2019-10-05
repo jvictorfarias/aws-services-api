@@ -3,24 +3,20 @@ import AWS from 'aws-sdk';
 
 class S3 {
   // Fix to multipart form
-  async upload(req, res) {
+  async uploadFile(bucketName, file) {
     const bucket = new AWS.S3();
-    const { originalname: name, buffer } = req.file;
+    const { originalname: name, buffer } = file;
     const params = {
-      Bucket: req.headers.name,
+      Bucket: bucketName,
       Key: name,
       Body: buffer,
     };
 
-    try {
-      await bucket.upload(params).promise();
-      return res.status(200).json({ ok: 'ok' });
-    } catch (err) {
-      return res.status(400).json({ error: 'error' });
-    }
+    const send = await bucket.upload(params).promise();
+    return send;
   }
 
-  async create(req, res) {
+  async createBucket(req, res) {
     const bucket = new AWS.S3();
     const { name } = req.body;
 
@@ -35,7 +31,7 @@ class S3 {
       });
   }
 
-  async index(req, res) {
+  async indexBuckets(req, res) {
     const bucket = new AWS.S3();
     await bucket
       .listBuckets()
@@ -48,7 +44,7 @@ class S3 {
       });
   }
 
-  async show(req, res) {
+  async showBucket(req, res) {
     const bucket = new AWS.S3();
     await bucket
       .listObjectsV2({ Bucket: req.params.name })
@@ -61,7 +57,7 @@ class S3 {
       });
   }
 
-  async delete(req, res) {
+  async deleteBucketFile(req, res) {
     const bucket = new AWS.S3();
     const { name, file } = req.body;
     await bucket
